@@ -15,13 +15,14 @@ public:
 
         while(words_in_string >> word){
             words.push_back(word);
-            // cout << word << endl;
         }
 
         string out_string;
         for(int i = words.size()-1 ; i >= 0 ; i--){
             out_string = out_string + words[i] + " ";
         }
+
+        // Remove the empty space at the end.
         if(!out_string.empty()){
             out_string.pop_back();
         }
