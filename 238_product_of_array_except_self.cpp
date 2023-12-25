@@ -42,6 +42,5 @@ int main(){
     Solution solution_instance;
     vector<int> nums = {-1,1,0,-3,3};
     vector<int> answer = solution_instance.productExceptSelf(nums);
-    // cout << solution_instance.productExceptSelf(nums) << endl;
     return 0;
 }
