@@ -3,6 +3,7 @@
         "vector": "cpp",
         "iosfwd": "cpp",
         "iostream": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "tuple": "cpp"
     }
 }
