@@ -4,6 +4,7 @@
         "iosfwd": "cpp",
         "iostream": "cpp",
         "__bit_reference": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "queue": "cpp"
     }
 }
