@@ -5,54 +5,36 @@ using namespace std;
 
 class Solution {
 public:
-    struct idxwithScore{
-        int idx;
-        int score;
-        idxwithScore(int idx, int score) : idx(idx), score(score) {}
-    };
-
-    struct Compare{
-        bool operator()(const idxwithScore& a, const idxwithScore& b){
-            return a.score < b.score;
-        }
-    };
-
     long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
-        priority_queue<idxwithScore, vector<idxwithScore>, Compare> pq;
-        for (int i = 0; i < nums2.size(); i++){
-            idxwithScore item = {i, nums2[i]};
-            pq.push(item);
-        }
-        idxwithScore a = pq.top();
-
-        vector<int> idxs(k);
-        for (int i = 0; i < k; i++){
-            idxwithScore item = pq.top();
-            idxs[i] = item.idx;
-            pq.pop();
+        priority_queue<pair<int,int>> pq_nums2;
+        // Pair has built it commparator which is compare first, if equal compare second.
+        for (int i = 0; i<nums1.size(); i++){
+            pq_nums2.push({nums2[i], i });
         }
 
-        cout << "Size of idxs : " << idxs.size() << endl;
-
-        long long max_score = 0;
-        long long running_sum = 0
-        for(int i = 0; i < nums2.size()-k; i++){
-            long long currSum = 0;
-            for(int j = 0; j < k; j++){
-                idxwithScore item = pq.top();
-                currSum += nums1[item.idx];
-                if(j == k-1){
-                    long long minNums2 = nums2[item.idx];
-                }
-                pq.pop();
-                
-            }
-            long long curr_score = minNums2 * currSum;
-            if (curr_score > max_score){
-                max_score = curr_score;
-            }
+        long long curr_sum = 0;
+        long long min_nums2 = INT_MAX;
+        long long solution = 0;
+        priority_queue<int, vector<int>, greater<int>> curr_num1;
+        while(k--){
+            auto top_item = pq_nums2.top(); pq_nums2.pop();
+            min_nums2 = top_item.first;
+            curr_sum += nums1[top_item.second];
+            curr_num1.push(nums1[top_item.second]);
         }
-        return max_score;
+        solution = curr_sum * min_nums2;
+
+        while(!pq_nums2.empty()){
+            // Remove the smallest item from curr_sum.
+            curr_sum -= curr_num1.top(); curr_num1.pop();
+            auto top_item = pq_nums2.top(); pq_nums2.pop();
+            min_nums2 = top_item.first;
+            curr_sum += nums1[top_item.second];
+            solution = max(solution, curr_sum * min_nums2);
+            curr_num1.push(nums1[top_item.second]);
+
+        }
+        return solution;
     }
 };
 
