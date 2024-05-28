@@ -1,1 +1,2 @@
-Solution to Leetcode 75 problems in cpp. I am doing this to learn cpp and getting started with leetcode.
+My solutions to the LeetCode 75 problems. 
+This repository serves as a collection of my solutions to leetcode problems, which are implemented in C++.
