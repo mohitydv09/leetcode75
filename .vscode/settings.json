@@ -6,6 +6,7 @@
         "__bit_reference": "cpp",
         "tuple": "cpp",
         "queue": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "unordered_map": "cpp"
     }
 }
