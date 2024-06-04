@@ -14,6 +14,7 @@ public:
             free[i] = max(free[i-1], prices[i] + holding[i-1] - fee);
             holding[i] = max(holding[i-1], free[i-1] - prices[i]);
         }
+        
         cout << "Free : "; 
         for(int item : free){
             cout << item << " ";
