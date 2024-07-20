@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        if(s == t){
+            return true;
+        }
+        return false;
+    }
+};
+
+int main(){
+    Solution solution;
+    string s = "anagram";
+    string t = "nagaram";
+    bool answer = solution.isAnagram(s, t);
+    cout << answer << endl;
+}
