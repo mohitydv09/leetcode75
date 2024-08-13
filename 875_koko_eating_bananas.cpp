@@ -13,7 +13,7 @@ public:
 
         int ans = 0;
         while (low<=high){
-            int mid = (low+high)/2;
+            double mid = (low+high)/2;
             long long time = timeRequired(piles, mid);
             if(time > h){
                 low = mid + 1;
@@ -26,7 +26,7 @@ public:
     }
 
 private:
-    long long timeRequired(vector<int>& piles, double k){
+    long long timeRequired(vector<int>& piles, double& k){
         long long time = 0;
         for(int pile : piles){
             time += ceil(pile/k);
