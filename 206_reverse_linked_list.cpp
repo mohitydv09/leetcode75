@@ -1,11 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-using namespace std;
 
 struct ListNode{
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
@@ -14,39 +13,35 @@ struct ListNode{
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if(!head || !head->next){return head;}
-        ListNode *reverse_ll = nullptr;
-        ListNode *current_node = head;
-        while(current_node){
-            ListNode *temp_pointer = current_node->next;
-            current_node->next = reverse_ll;
-            reverse_ll = current_node;
-            current_node = temp_pointer;
+        // Edge Cases when there is only one value or less.
+        if(!head || !head->next) {return head;};
+        ListNode* reverseLL = nullptr;
+        while(head){
+            ListNode* tempNode = head->next;
+            head->next = reverseLL;
+            reverseLL = head;
+            head = tempNode;
         }
-        cout << "reverse funtion ram" << endl;
-        return reverse_ll;
+        return reverseLL;
     }
 };
 
 int main(){
-    Solution solution_instance;
-    vector<int> input_head = {1,2,3,4,5};
+    Solution solution;
+    std::vector<int> input = {1,2,3,4,5};
 
-    ListNode *head = new ListNode();
-    ListNode *current_node = head;
-
-    for (int i = 0; i < input_head.size()-1; i++){
-        ListNode *temp_node = new ListNode();
-        current_node->val = input_head[i];
-        current_node->next = temp_node;
-        current_node = current_node->next;
+    ListNode* head = new ListNode(input[input.size()-1]);
+    for (int i = input.size()-2; i >= 0; --i){
+        head = new ListNode(input[i], head);
     }
-    current_node->val = input_head[input_head.size()-1];
-
-    ListNode *solution = solution_instance.reverseList(head);
-    while(solution){
-        cout << "This is solution item : " << solution->val << endl;
-        solution = solution->next;
+    
+    ListNode* answer = solution.reverseList(head);
+    // Print out the reversed LL for debugging.
+    std::cout << "Answer: ";
+    while(answer){
+        std::cout << answer->val << " ";
+        answer = answer->next;
     }
+    std::cout << std::endl;
     return 0;
 } 
