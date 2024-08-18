@@ -30,7 +30,7 @@ int main(){
     Solution solution;
     std::vector<int> input = {1,2,3,4,5};
 
-    ListNode* head = new ListNode(input[input.size()-1]);
+    ListNode* head = new ListNode(input.back());
     for (int i = input.size()-2; i >= 0; --i){
         head = new ListNode(input[i], head);
     }
