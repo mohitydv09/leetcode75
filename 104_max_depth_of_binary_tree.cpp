@@ -2,8 +2,6 @@
 #include <vector>
 #include <stack>
 #include <queue>
-#include <cmath>
-using namespace std;
 
 struct TreeNode {
     int val;
@@ -18,32 +16,30 @@ class Solution {
 public:
     int maxDepth(TreeNode* root) {
         if(!root){return 0;}
-        return max(maxDepth(root->left)+1, maxDepth(root->right)+1);
+        return std::max(maxDepth(root->left)+1, maxDepth(root->right)+1);
     }
 };
 
-int main(){
-    Solution solution_instance;
-    vector<int> input_head = {1,2,3,4,5};
+int main() {
+    std::vector<int> input = {4,2,7,1,3,6,9};
+    // Create Tree from Input.
+    TreeNode* root = new TreeNode(input[0]);
+    std::queue<TreeNode*> q;
+    q.push(root);
 
-    TreeNode *head = new TreeNode(input_head[0]);
-    queue<TreeNode*> frontier;
-    frontier.push(head);
-
-    for (int i = 1; i < input_head.size(); i++){
-        TreeNode *temp_node = new TreeNode(input_head[i]);
-        if(i%2 != 0){
-        // put on left side.
-            frontier.front()->left = temp_node;
-            frontier.push(temp_node);
-        }else{
-            frontier.front()->right = temp_node;
-            frontier.push(temp_node);
-            frontier.pop();
+    for (int i = 1; i < input.size(); ++i){
+        TreeNode* current = q.front();
+        TreeNode* newNode = new TreeNode(input[i]);
+        if(!current->left){
+            current->left = newNode;
+        }else if(!current->right){
+            current->right = newNode;
+            q.pop();
         }
+        q.push(newNode);
     }
 
-    cout << "This is trial print : " << head->left->right->val << endl;
-    cout << solution_instance.maxDepth(head) << endl;
-    return 0;
-} 
+    Solution solution;
+    int answer = solution.maxDepth(root);
+    std::cout << "Answer: " << answer << std::endl;
+};
