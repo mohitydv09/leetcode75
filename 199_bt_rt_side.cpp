@@ -16,60 +16,55 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
+    std::vector<int> rightSideView(TreeNode* root) {
+        if(!root){return {};};
 
-        vector<int> solution;
-        if (root == nullptr){
-            return solution;
-        }
-        queue<TreeNode*> frontier;
+        std::queue<TreeNode*> frontier;
         frontier.push(root);
+
+        std::vector<int> answer;
+
         while(!frontier.empty()){
-            solution.push_back(frontier.back()->val);
-            int curr_frontier_len = frontier.size();
-            for (int i = 0; i < curr_frontier_len ; i++){
-                TreeNode* curr_node = frontier.front();
-                frontier.pop();
-                if (curr_node->left != nullptr){
-                    frontier.push(curr_node->left);
-                }
-                if (curr_node->right != nullptr){
-                    frontier.push(curr_node->right);
+            int qLength = frontier.size();
+            for (int i = 0; i < qLength; ++i){
+                TreeNode* current = frontier.front(); frontier.pop();
+                if(current->left){frontier.push(current->left);};
+                if(current->right){frontier.push(current->right);};
+                if(i+1 == qLength){
+                    answer.push_back(current->val);
                 }
             }
+            
         }
-        return solution;
+        return answer;
     }
 };
 
 
-int main(){
-    Solution solution_instance;
-    vector<int> input_head = {1,2,3,4,5};
+int main() {
+    std::vector<int> input = {4,2,7,1,3,6,9};
+    // Create Tree from Input.
+    TreeNode* root = new TreeNode(input[0]);
+    std::queue<TreeNode*> q;
+    q.push(root);
 
-    TreeNode *head = new TreeNode(input_head[0]);
-    queue<TreeNode*> frontier;
-    frontier.push(head);
-
-    for (int i = 1; i < input_head.size(); i++){
-        TreeNode *temp_node = new TreeNode(input_head[i]);
-        if(i%2 != 0){
-        // put on left side.
-            frontier.front()->left = temp_node;
-            frontier.push(temp_node);
-        }else{
-            frontier.front()->right = temp_node;
-            frontier.push(temp_node);
-            frontier.pop();
+    for (int i = 1; i < input.size(); ++i){
+        TreeNode* current = q.front();
+        TreeNode* newNode = new TreeNode(input[i]);
+        if(!current->left){
+            current->left = newNode;
+        }else if(!current->right){
+            current->right = newNode;
+            q.pop();
         }
+        q.push(newNode);
     }
-    TreeNode *p = head->left->left;
-    TreeNode *q = head->left->right;
 
-    cout << "This is trial print : " << head->left->right->val << endl;
-    for (int item : solution_instance.rightSideView(head)){
-        cout << item; 
+    Solution solution;
+    std::vector<int> answer = solution.rightSideView(root);
+    std::cout << "Answer: ";
+    for (auto item : answer){
+        std::cout << item << " ";
     }
-    cout << endl;
-    return 0;
-} 
+    std::cout << std::endl;
+};
