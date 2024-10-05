@@ -1,41 +1,41 @@
-#include <iostream>
-
-using namespace std;
+#include<iostream>
+#include<string>
+#include<vector>
+#include<unordered_map>
 
 class Solution {
+std::vector<std::string> answer;
+std::unordered_map<char,std::string> digit2chars = {
+    {'2', "abc"},
+    {'3', "def"},
+    {'4', "ghi"},
+    {'5', "jkl"},
+    {'6', "mno"},
+    {'7', "pqrs"},
+    {'8', "tuv"},
+    {'9', "wxyz"}
+};
+
 public:
-    vector<string> letterCombinations(string digits) {
-        vector<string> ans;
+    std::vector<std::string> letterCombinations(std::string digits) {
         if(digits.size() == 0){
-            return ans;
+            return answer;
         }
-        unordered_map<char, string> int2chars;
-        int2chars['2'] = "abc";
-        int2chars['3'] = "def";
-        int2chars['4'] = "ghi";
-        int2chars['5'] = "jkl";
-        int2chars['6'] = "mno";
-        int2chars['7'] = "pqrs";
-        int2chars['8'] = "tuv";
-        int2chars['9'] = "wxyz";
-
-        backTrack(0, "", digits, int2chars, ans);
-
-        return ans;
+        std::string currString;
+        backTrack(0, digits, currString);
+        return answer;
     }
 
 private:
-    void backTrack(int idx, string currString, string &digits, unordered_map<char, string> &int2chars, vector<string> &ans){
+    void backTrack(int idx, std::string &digits, std::string &currString){
         if(idx == digits.size()){
-            ans.push_back(currString);
-            // cout << "Pushed back to ans : " << currString << endl;
-            currString.pop_back();
+            answer.push_back(currString);
             return;
         }
-        string chars4digit = int2chars[digits[idx]];
-        for (int i = 0; i < chars4digit.size(); i++){
-            currString += chars4digit[i];
-            backTrack(idx + 1, currString, digits, int2chars, ans);
+        std::string characters = digit2chars[digits[idx]];
+        for(int i = 0; i < characters.size(); ++i){
+            currString.push_back(characters[i]);
+            backTrack(idx + 1, digits, currString);
             currString.pop_back();
         }
         return;
@@ -43,11 +43,13 @@ private:
 };
 
 int main(){
-    Solution solution_instance;
-    string digits = "23";
-    vector<string> ans = solution_instance.letterCombinations(digits);
-    for(string item : ans){
-        cout << "Item : " << item << endl;
+    Solution solution;
+    std::string digits = "";
+    std::vector<std::string> ans = solution.letterCombinations(digits);
+    std::cout << "Answer: " ;
+    for(std::string item : ans){
+        std::cout << " " << item;
     }
+    std::cout << std::endl;
     return 0;
 }
