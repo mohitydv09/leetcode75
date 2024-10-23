@@ -38,5 +38,5 @@ int main(){
     int src = 0;
     int dst = 3;
     int k = 1;
-    std::cout << "Answer: " << solution.findCheapestPrice(n, flights, src, dst, k) std::endl;
+    std::cout << "Answer: " << solution.findCheapestPrice(n, flights, src, dst, k) << std::endl;
 }
