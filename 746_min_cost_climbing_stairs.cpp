@@ -1,22 +1,23 @@
 #include<iostream>
-
-using namespace std;
+#include<vector>
 
 class Solution {
 public:
-    int minCostClimbingStairs(vector<int>& cost) {
-        vector<int> min_cost(cost.size(),0);
-        min_cost[0] = cost[0];
-        min_cost[1] = cost[1];
-        for(int i = 2; i < min_cost.size(); i++){
-            min_cost[i] = cost[i] + min(min_cost[i-1], min_cost[i-2]);
+    int minCostClimbingStairs(std::vector<int>& cost){
+        int secondLast = cost[0];
+        int last = cost[1];
+        for(int i = 2; i < cost.size(); ++i){
+            int temp = last;
+            last = std::min(secondLast + cost[i], last + cost[i]);
+            secondLast = temp;
         }
-        return min(min_cost[min_cost.size()-1], min_cost[min_cost.size()-2]);
+        return std::min(last, secondLast);
     }
 };
 
 int main(){
     Solution solution_instance;
-    vector<int> cost= {1,100,1,1,1,100,1,1,100,1};
-    cout << "Ans : " << solution_instance.minCostClimbingStairs(cost) << endl;
+    std::vector<int> cost = {1,100,1,1,1,100,1,1,100,1};
+    // std::vector<int> cost = {10,15,20};
+    std::cout << "Answer: " << solution_instance.minCostClimbingStairs(cost) << std::endl;
 }
