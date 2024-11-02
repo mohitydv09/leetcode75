@@ -1,13 +1,12 @@
 #include<iostream>
-
-using namespace std;
+#include<vector>
 
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        vector<vector<int>> grid(m, vector<int>(n,1));
-        for(int i = 1; i < m; i++){
-            for(int j = 1; j < n; j++){
+        std::vector<std::vector<int>> grid(m, std::vector<int>(n,1));
+        for(int i = 1; i < m; ++i){
+            for(int j = 1; j < n; ++j){
                 grid[i][j] = grid[i-1][j] + grid[i][j-1];
             }
         }
@@ -17,7 +16,5 @@ public:
 
 int main(){
     Solution solution_instance;
-    int m = 2;
-    int n = 1;
-    cout << "Ans : " << solution_instance.uniquePaths(m,n) << endl;
+    std::cout << "Ans : " << solution_instance.uniquePaths(3,4) << std::endl;
 }
