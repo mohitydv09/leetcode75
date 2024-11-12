@@ -36,9 +36,5 @@ public:
 
 int main(){
     Solution solution_instance;
-    // string word1 = "horse";
-    // string word1 = "zoologicoarchaeologist";
-    // ststring word2 = "ros"; 
-    // string word2 = "zoogeologist";
     std::cout << "Answer: " << solution_instance.minDistance("horse", "ros") << std::endl;
 }
