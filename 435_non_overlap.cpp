@@ -1,31 +1,18 @@
 #include<iostream>
-
-using namespace std;
+#include<vector>
+#include<algorithm>
 
 class Solution {
 public:
-    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+    int eraseOverlapIntervals(std::vector<std::vector<int>>& intervals) {
+        std::sort(intervals.begin(), intervals.end());
 
-        auto comparator = [](vector<int>& a, vector<int>& b){
-            if(a[0] == b[0]){
-                return a[1] < b [1];
-            }else{
-                return a[0] < b[0];
-            }
-        };
-
-        // Sort according to the first element in vects.
-        sort(intervals.begin(), intervals.end(), comparator);
-
-        // Go in loop to find the comparator.
         int ans = 0;
-        int currEnd = intervals[0][1];
+        int currEnd = intervals[0][1]; 
         for (int i = 1; i < intervals.size(); i++){
-            if(intervals[i][0] < currEnd && intervals[i][1] < currEnd){
+            if(intervals[i][0] < currEnd){
                 ans++;
-                currEnd = intervals[i][1];
-            }else if(intervals[i][0] < currEnd){
-                ans++;
+                currEnd = std::min(currEnd,intervals[i][1]);
             }else{
                 currEnd = intervals[i][1];
             }
@@ -35,7 +22,8 @@ public:
 };
 
 int main(){
-    Solution obj;
-    vector<vector<int>> intervals = {{1,2},{2,3},{3,4},{1,3}};
-    cout << obj.eraseOverlapIntervals(intervals) << endl;
+    Solution solution;
+    std::vector<std::vector<int>> intervals = {{0,2},{1,3},{2,4},{3,5},{4,6}};
+    int answer = solution.eraseOverlapIntervals(intervals);
+    std::cout << "Answer: " << answer << std::endl;
 }
