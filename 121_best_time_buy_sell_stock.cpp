@@ -1,23 +1,14 @@
 #include <iostream>
-
-using namespace std;
+#include <vector>
 
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        int left = 0;
-        int right = 0;
+    int maxProfit(std::vector<int>& prices) {
+        int currMin = prices[0];
         int maxProfit = 0;
-        while(right < prices.size()){
-            if(prices[left] < prices[right]){
-                int profit = prices[right] - prices[left];
-                if(profit > maxProfit){
-                    maxProfit = profit;
-                }
-            }else{
-                left=right;
-            }
-            right++;
+        for (int i = 0; i < prices.size(); ++i){
+            currMin = std::min(currMin, prices[i]);
+            maxProfit = std::max(maxProfit, prices[i]-currMin);
         }
         return maxProfit;
     }
@@ -25,7 +16,7 @@ public:
 
 int main(){
     Solution solution;;
-    vector<int> input_ = {7,1,5,3,6,4,-50,0};
-    int answer = solution.maxProfit(input_);
-    cout << "Answer: " << answer << endl;
+    std::vector<int> prices = {7,1,5,3,6,4,-0,0};
+    int answer = solution.maxProfit(prices);
+    std::cout << "Answer: " << answer << std::endl;
 }
