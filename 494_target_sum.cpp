@@ -5,6 +5,7 @@
 class Solution {
 public:
     int findTargetSumWays(std::vector<int>& nums, int target) {
+        // Next time rewrite this with memoization.
         int totalSum = std::accumulate(nums.begin(), nums.end(), 0);
         if(std::abs(target) > std::abs(totalSum)){
             return 0;
