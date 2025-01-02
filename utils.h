@@ -9,6 +9,7 @@
 #include<optional>
 #include<queue>
 
+
 using namespace std;
 
 struct TreeNode {
@@ -52,4 +53,12 @@ void deleteTree(TreeNode* root){
     deleteTree(root->left);
     deleteTree(root->right);
     delete root;
+}
+
+template <typename T>
+void printVector(vector<T>& vec){
+    for(const auto& ele : vec){
+        cout << ele << " ";
+    }
+    cout << endl;
 }
