@@ -5,6 +5,7 @@
 #include<map>
 #include<set>
 #include<string>
+#include<algorithm>
 
 #include "utils.h"
 
