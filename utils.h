@@ -57,6 +57,7 @@ void deleteTree(TreeNode* root){
 
 template <typename T>
 void printVector(vector<T>& vec){
+    cout << "Vector: ";
     for(const auto& ele : vec){
         cout << ele << " ";
     }
