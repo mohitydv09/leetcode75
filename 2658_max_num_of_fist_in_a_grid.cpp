@@ -29,11 +29,9 @@ public:
     }
 private:
     int dfs(int row, int col, vector<vector<int>>& grid, vector<vector<bool>>& visited){
-        cout << "Row: " << row << " " << col << endl;
         if(visited[row][col]){
             return 0;
         }
-        cout << "Row: " << row << " " << col << endl;
         visited[row][col] = true;
         int top = (row > 0 && !visited[row-1][col] && grid[row-1][col] != 0) ? dfs(row-1, col, grid, visited) : 0;
         int bottom = (row+1 < grid.size() && !visited[row+1][col] && grid[row+1][col] != 0) ? dfs(row+1, col, grid, visited) : 0;
