@@ -16,6 +16,7 @@ public:
                 return edges[edge];
             }
         }
+        return {};
     }
 
 private:
