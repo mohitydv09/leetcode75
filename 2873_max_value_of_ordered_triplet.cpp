@@ -14,14 +14,11 @@ using namespace std;
 class Solution {
 public:
     long long maximumTripletValue(vector<int>& nums) {
-        long long answer = 0;
-        for (int i = 0; i < nums.size()-2; ++i){
-            for (int j = i + 1; j < nums.size()-1; ++j){
-                for (int k = j + 1; k < nums.size(); ++k){
-                    long long val =  1LL * (nums[i] - nums[j]) * nums[k];
-                    answer = max(answer, val);
-                }
-            }
+        long long answer = 0, imax = 0, dmax = 0;
+        for(int k = 0; k < nums.size(); ++k){
+            answer = max(answer, dmax * nums[k]);
+            dmax = max(dmax, imax - nums[k]);
+            imax = max(imax, static_cast<long long>(nums[k]));
         }
         return answer;
     }
